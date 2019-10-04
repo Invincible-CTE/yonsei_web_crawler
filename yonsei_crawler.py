@@ -1,6 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import numpy as np
+import html_parser as hp
 
 
 class YonseiCrawler:
@@ -27,12 +28,12 @@ class YonseiCrawler:
 
             # art_list의 데이터를 하나씩 가져와서 리스트로 묶어서 다시 넣고 원본 데이터는 삭제
             for i in range(len(page_arts)):
-                page_arts.append([int(tr_to_txt(page_arts[0].find("td", {"class": "no"}))),
-                                  tr_to_txt(page_arts[0].find("td", {"class": "title"})),
+                page_arts.append([int(hp.tr_to_txt(page_arts[0].find("td", {"class": "no"}))),
+                                  hp.tr_to_txt(page_arts[0].find("td", {"class": "title"})),
                                   target_url + page_arts[0].find("td", {"class": "title"}).find("a").get("href"),
-                                  tr_to_txt(page_arts[0].find("td", {"class": "author"})),
-                                  tr_to_txt(page_arts[0].find("td", {"class": "time"})),
-                                  int(tr_to_txt(page_arts[0].find("td", {"class": "m_no"})))])
+                                  hp.tr_to_txt(page_arts[0].find("td", {"class": "author"})),
+                                  hp.tr_to_txt(page_arts[0].find("td", {"class": "time"})),
+                                  int(hp.tr_to_txt(page_arts[0].find("td", {"class": "m_no"})))])
                 page_arts.pop(0)
 
             page += 1
@@ -51,35 +52,30 @@ class YonseiCrawler:
     def get_latest_attr(self, attr, cnt=5):
         """최신 cnt개의 공지사항의 특정 애트리뷰트들만 가져오는메소드
         attr 종류는 index(0), title(1), url(2), author(3), time(4), m_no(5)"""
-        tmp_arr = np.ndarray(self.art_list)
+        tmp_arr = np.array(self.art_list)
         return_value = ""
 
         if type(attr) == str:
             if attr == 'index':
-                return_value = tmp_arr[:5, 0]
+                return_value = tmp_arr[:cnt, 0]
             elif attr == 'title':
-                return_value = tmp_arr[:5, 1]
+                return_value = tmp_arr[:cnt, 1]
             elif attr == 'url':
-                return_value = tmp_arr[:5, 2]
+                return_value = tmp_arr[:cnt, 2]
             elif attr == 'author':
-                return_value = tmp_arr[:5, 3]
+                return_value = tmp_arr[:cnt, 3]
             elif attr == 'time':
-                return_value = tmp_arr[:5, 4]
+                return_value = tmp_arr[:cnt, 4]
             elif attr == 'm_no':
-                return_value = tmp_arr[:5, 5]
+                return_value = tmp_arr[:cnt, 5]
             else:
                 raise IndexError
         elif type(attr) == int:
             if attr > 5:
                 raise IndexError
-            return_value = tmp_arr[:5, attr]
+            return_value = tmp_arr[:cnt, attr]
         else:
             raise AttributeError
 
         return list(return_value)
 
-
-def tr_to_txt(tr_str):
-    """description
-    tr태그의 정보만을 추출하여 str 타입의 데이터를 리턴하는 함수"""
-    return str(tr_str.text).replace("\t", "").replace("\r", "").replace("\n", "")

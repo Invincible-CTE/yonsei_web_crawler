@@ -2,10 +2,11 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from datetime import date
 from datetime import timedelta
+import html_parser as hp
 
 
 class YonseiCalendarCrawler:
-
+    """연세 학사 일정 가져오는 클래스"""
     def __init__(self):
         """ 월 값들 가져오는 부분 """
         # 월 태그들을 일단 raw하게 넣음
@@ -34,15 +35,15 @@ class YonseiCalendarCrawler:
             detail = str(desc[i + 1]).split(">")[2].split("<")[0]
 
             if "~" in date_info:
-                if tilde_txt_to_dates(date_info)[0] == -1:
-                    start, mon, day = tilde_txt_to_dates(date_info)[1:]
+                if hp.tilde_txt_to_dates(date_info)[0] == -1:
+                    start, mon, day = hp.tilde_txt_to_dates(date_info)[1:]
                     for k in range((date(current_year, month, start) - date(current_year, mon, day)).days + 1):
                         schedule.append([date(current_year, month, start) + timedelta(days=k), detail])
-                elif tilde_txt_to_dates(date_info)[0] == 0:
+                elif hp.tilde_txt_to_dates(date_info)[0] == 0:
                     # 위에서 데이터 추가했으니 중복이 되므로 pass
                     pass
                 else:
-                    date_info = tilde_txt_to_dates(date_info)  # a~b int list type
+                    date_info = hp.tilde_txt_to_dates(date_info)  # a~b int list type
 
                     if date_info[0] < last_date:  # 다음 달로 넘어간 경우
                         month = month_names[month % 12]
@@ -55,7 +56,7 @@ class YonseiCalendarCrawler:
                             last_date = date_info[0]
 
             else:
-                date_info = small_bracket_to_int(date_info)
+                date_info = hp.small_bracket_to_int(date_info)
                 if date_info < last_date:  # 다음 달로 넘어간 경우
                     month = month_names[month % 12]
                     current_year = current_year + 1 if month == 1 else current_year
@@ -64,64 +65,21 @@ class YonseiCalendarCrawler:
 
         self.schedule_list = schedule
 
+    # 오늘의 일정 가져오기
+    def get_today_schedule(self):
+        sc = self.schedule_list
+        rt = []
+        for i in sc:
+            if date.today() == i[0]:
+                rt.append(i[1])
 
-# "1(목)~7(수)" -> [1,2,3,4,5,6,7]
-def tilde_txt_to_dates(txt_date):
-    start, end = txt_date.split("~")
+        return rt
 
-    if '.' not in start and '.' not in end:
-        start = small_bracket_to_int(start)
-        end = small_bracket_to_int(end)
-        return [x for x in range(start, end + 1)]
-    elif '.' in start:
-        # ex) 10.29(화)~1(금)
-        mon, day = start.split(".")
-        mon = small_bracket_to_int(mon)
-        day = small_bracket_to_int(day)
-        end = small_bracket_to_int(end)
-        return [0, mon, day, end]
-    else:  # case of '.' in end
-        # ex) 29(화)~11.01(금)
-        mon, day = end.split(".")
-        mon = small_bracket_to_int(mon)
-        day = small_bracket_to_int(day)
-        start = small_bracket_to_int(start)
-        return [-1, start, mon, day]
+    def get_all(self):
+        return self.schedule_list
 
-
-# "15(목)" -> 15
-def small_bracket_to_int(txt_date):
-    return int(txt_date.split("(")[0])
-
-
-# 오늘의 일정 가져오기
-def get_today_schedule(sc):
-    rt = []
-    for i in sc:
-        if date.today() == i[0]:
-            rt.append(i[1])
-
-    return rt
-
-
-# "15(목)" -> 3 (weekday)
-def txt_to_date(date_text):
-    """1(목)같은 스트링 데이터가 들어오면 3 리턴
-    월:0, 화:1, 수:2, 목:3, 금:4, 토:5, 일:6
-    다른 경우에는 ValueError"""
-    if date_text.__contain__("월"):
-        return 0
-    elif date_text.__contain__("화"):
-        return 1
-    elif date_text.__contain__("수"):
-        return 2
-    elif date_text.__contain__("목"):
-        return 3
-    elif date_text.__contain__("금"):
-        return 4
-    elif date_text.__contain__("토"):
-        return 5
-    elif date_text.__contain__("일"):
-        return 6
-    else:  # case of error
-        raise ValueError
+    def get_latest(self, cnt):
+        try:
+            return self.schedule_list[:cnt]
+        except IndexError:
+            return self.schedule_list
