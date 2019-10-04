@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import html_parser as hp
 
 
-class YonseiBoardCrawler:
+class MainNoticeCrawler:
     """연세 공지사항 가져오는 클래스"""
     def __init__(self, limit):
         self.art_list = []  # 공지사항 리스트

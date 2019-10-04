@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="714d53dd-bce7-4560-8b08-4de11ec8618a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yonsei_board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/yonsei_web_crawler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/yonsei_web_crawler.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yonsei_calendar_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonsei_calendar_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yonsei_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonsei_crawler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crawler/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonsei_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/main_notice_crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonsei_calendar_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/calendar_crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonsei_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/page_notice_crawler.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +169,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/yonsei_board.py" />
+      <option name="SCRIPT_NAME" value="C:\workspace\PhireRed2015\yonsei_web_crawler\crawler\main_notice_crawler.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -274,6 +270,21 @@
       <updated>1570186870425</updated>
       <workItem from="1570186871720" duration="3987000" />
     </task>
+    <task id="LOCAL-00001" summary="html parsing 해서 가져올 때 str 변환할 때 쓰는 메소드들 모아둔 모듈 html_parser 만듬&#10;각 모듈에 있던 내용 html_parser로 통합">
+      <created>1570211577383</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1570211577383</updated>
+    </task>
+    <task id="LOCAL-00002" summary="연세대 홈페이지 공지사항 가져오는 yonsei_board 모듈 만듬&#10;만든 모듈들 테스트하는 main.py 만듬">
+      <created>1570211639070</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1570211639070</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -293,26 +304,31 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="html parsing 해서 가져올 때 str 변환할 때 쓰는 메소드들 모아둔 모듈 html_parser 만듬&#10;각 모듈에 있던 내용 html_parser로 통합" />
+    <MESSAGE value="연세대 홈페이지 공지사항 가져오는 yonsei_board 모듈 만듬&#10;만든 모듈들 테스트하는 main.py 만듬" />
+    <option name="LAST_COMMIT_MESSAGE" value="연세대 홈페이지 공지사항 가져오는 yonsei_board 모듈 만듬&#10;만든 모듈들 테스트하는 main.py 만듬" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/yonsei_board.py</url>
+          <url>file://$PROJECT_DIR$/crawler/main_notice_crawler.py</url>
           <line>25</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/yonsei_board.py</url>
+          <url>file://$PROJECT_DIR$/crawler/main_notice_crawler.py</url>
           <line>24</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/yonsei_board.py</url>
+          <url>file://$PROJECT_DIR$/crawler/main_notice_crawler.py</url>
           <line>28</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/yonsei_board.py</url>
+          <url>file://$PROJECT_DIR$/crawler/main_notice_crawler.py</url>
           <line>26</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>

@@ -4,7 +4,7 @@ import numpy as np
 import html_parser as hp
 
 
-class YonseiCrawler:
+class PageNoticeCrawler:
     """연세대학교 페이지들의 공지사항을 크롤링 하는 클래스
     url 설정을 안 하면 컴정 홈페이지의 공지사항을 크롤링함"""
 

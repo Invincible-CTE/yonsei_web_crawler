@@ -5,7 +5,7 @@ from datetime import timedelta
 import html_parser as hp
 
 
-class YonseiCalendarCrawler:
+class CalendarCrawler:
     """연세 학사 일정 가져오는 클래스"""
     def __init__(self):
         """ 월 값들 가져오는 부분 """
