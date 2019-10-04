@@ -20,7 +20,7 @@ class MainNoticeCrawler:
                 bs_object = BeautifulSoup(html, "html.parser")
                 page_arts = []
                 page_arts = page_arts + bs_object.body.find("ul", {"class": "board_list"}).find_all("li")
-                if len(page_arts) == 4 or self.offset > limit:
+                if len(page_arts) <= 10 or self.offset > self.limit:
                     raise IndexError  # 마지막 페이지 처리
                 for item in range(len(page_arts)):
                     tmp = []
